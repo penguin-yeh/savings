@@ -11,7 +11,8 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
   <link rel="manifest" href="site.webmanifest">
   <meta name="apple-mobile-web-app-title" content="省錢情報">
-  <meta name="theme-color" content="#1a1815">
+  <meta name="theme-color" content="#0b6a3c" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#072818" media="(prefers-color-scheme: dark)">
   <!--
     省錢情報。改版面前先讀 STYLE.md。
     優惠在 deals.json，請用 scripts/deals.py，不要手改。
@@ -19,31 +20,46 @@
   <style>
     :root {
       color-scheme: light;
-      --bg: #efe6d8;
-      --fg: #1c1915;
-      --muted: #6f655b;
-      --paper: #fbf7f1;
-      --line: #e3d5c2;
-      --mast: #1a1815;
-      --mast-fg: #f8f2e8;
-      --mast-muted: #c9baa6;
-      --gold: #e2b15a;
-      --serif: "Iowan Old Style", Palatino, "Palatino Linotype", "Songti TC", "Noto Serif TC", "PMingLiU", serif;
+      --bg: #e6f2e8;
+      --fg: #13261c;
+      --muted: #4f6558;
+      --paper: #f7fbf8;
+      --line: #c9ddd0;
+      --mast: #0b6a3c;
+      --mast-fg: #f4fff8;
+      --mast-muted: #d7f3e3;
+      --tag: #ffd2c4;
+      --urgent: #c2410c;
+      --urgent-ink: #fff7f4;
+      --soon-fill: #fff4e5;
+      --soon-ink: #8a3d08;
+      --soon-line: #e8b48a;
+      --later-fill: #e5f6ea;
+      --later-ink: #0b6a3c;
+      --later-line: #0b6a3c;
       --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
         color-scheme: dark;
-        --bg: #100f0d;
-        --fg: #f4efe6;
-        --muted: #b7ab9c;
-        --paper: #1b1a17;
-        --line: #34302a;
-        --mast: #070706;
-        --mast-fg: #f7f2ea;
-        --mast-muted: #b7ab9c;
-        --gold: #e2b15a;
+        --bg: #0c1410;
+        --fg: #e7f6ec;
+        --muted: #b7cfc0;
+        --paper: #15211b;
+        --line: #2c4034;
+        --mast: #072818;
+        --mast-fg: #f3fff6;
+        --mast-muted: #c5e6d4;
+        --tag: #ffb59a;
+        --urgent: #ff7a55;
+        --urgent-ink: #3a120c;
+        --soon-fill: #3a2714;
+        --soon-ink: #ffd7b0;
+        --soon-line: #c4894a;
+        --later-fill: #143226;
+        --later-ink: #7ddea6;
+        --later-line: #3dce7a;
       }
     }
 
@@ -69,7 +85,8 @@
     .masthead {
       background: var(--mast);
       color: var(--mast-fg);
-      padding: 2.8rem 1.25rem 2.2rem;
+      border-top: 6px solid var(--urgent);
+      padding: 1.65rem 0 1.35rem;
     }
 
     .wrap {
@@ -79,18 +96,27 @@
     }
 
     .kicker {
-      margin: 0 0 0.7rem;
-      color: var(--gold);
-      font-size: 0.74rem;
-      font-weight: 700;
-      letter-spacing: 0.24em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin: 0 0 0.45rem;
+      color: var(--tag);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+    }
+
+    .kicker svg {
+      display: block;
+      width: 1.05rem;
+      height: 1.05rem;
     }
 
     h1 {
       margin: 0;
-      font-family: var(--serif);
-      font-size: clamp(2.15rem, 6vw, 3.25rem);
-      font-weight: 600;
+      font-family: var(--sans);
+      font-size: clamp(2rem, 7vw, 2.7rem);
+      font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1.12;
     }
@@ -120,6 +146,7 @@
       margin: 0 0 1rem;
       padding: 0.55rem 0 0.65rem;
       background: var(--bg);
+      border-bottom: 1px solid var(--line);
     }
 
     .chips {
@@ -167,7 +194,7 @@
     a.chip:hover { text-decoration: underline; text-underline-offset: 0.16em; }
 
     a.chip:focus-visible {
-      outline: 2px solid var(--gold);
+      outline: 2px solid var(--urgent);
       outline-offset: 3px;
     }
 
@@ -210,22 +237,28 @@
 
     .group h2 {
       display: flex;
+      width: fit-content;
       align-items: center;
-      gap: 0.7rem;
-      margin: 0 0 0.7rem;
-      font-family: var(--serif);
-      font-size: 1.35rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
+      gap: 0.4rem;
+      margin: 0 0 0.75rem;
+      padding: 0.22rem 0.72rem 0.22rem 0.22rem;
+      border-radius: 999px;
+      background: var(--fill);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1.2;
     }
 
     .group h2 .mark {
-      width: 2.4rem;
-      height: 2.4rem;
-      border-radius: 0.7rem;
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: 999px;
     }
 
-    .group h2 .mark svg { width: 1.25rem; height: 1.25rem; }
+    .group h2 .mark svg { width: 0.95rem; height: 0.95rem; }
 
     .deals {
       list-style: none;
@@ -234,18 +267,22 @@
     }
 
     .deals li {
-      background: var(--fill);
-      color: var(--ink);
-      border-radius: 1rem;
-      padding: 0.9rem 1rem;
-      margin: 0 0 0.65rem;
+      background: var(--paper);
+      color: var(--fg);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--mark);
+      border-radius: 0.85rem;
+      padding: 0.8rem 0.9rem 0.85rem;
+      margin: 0 0 0.7rem;
       min-width: 0;
     }
 
+    .deals li.is-urgent { border-left-color: var(--urgent); }
+
     .title-link {
-      color: var(--ink);
-      font-size: 1.02rem;
-      font-weight: 700;
+      color: var(--fg);
+      font-size: 1.05rem;
+      font-weight: 800;
       text-decoration: none;
       overflow-wrap: anywhere;
     }
@@ -260,20 +297,38 @@
     }
 
     .expiry {
-      display: inline-block;
-      margin: 0.4rem 0 0;
-      padding: 0.08rem 0.5rem;
-      border: 1px solid var(--hairline);
+      display: block;
+      width: fit-content;
+      margin: 0 0 0.45rem;
+      padding: 0.2rem 0.62rem;
       border-radius: 999px;
-      color: var(--soft);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      line-height: 1.35;
+    }
+
+    .expiry.is-urgent {
+      background: var(--urgent);
+      color: var(--urgent-ink);
+      border: 1px solid var(--urgent);
+    }
+
+    .expiry.is-soon {
+      background: var(--soon-fill);
+      color: var(--soon-ink);
+      border: 1px solid var(--soon-line);
+    }
+
+    .expiry.is-later {
+      background: var(--later-fill);
+      color: var(--later-ink);
+      border: 1px solid var(--later-line);
     }
 
     .note {
       margin: 0.4rem 0 0;
-      color: var(--soft);
+      color: var(--muted);
       font-size: 0.92rem;
       overflow-wrap: anywhere;
     }
@@ -422,9 +477,9 @@
     }
     .gate h2 {
       margin: 0 0 0.85rem;
-      font-family: var(--serif);
+      font-family: var(--sans);
       font-size: 1.35rem;
-      font-weight: 600;
+      font-weight: 800;
     }
     .gate label { display: block; margin-bottom: 0.4rem; font-size: 0.88rem; color: var(--muted); }
     .gate input {
@@ -452,7 +507,7 @@
     .gate button:disabled { opacity: 0.6; cursor: default; }
     .gate input:focus-visible,
     .gate button:focus-visible {
-      outline: 2px solid var(--gold);
+      outline: 2px solid var(--urgent);
       outline-offset: 2px;
     }
     .gate-error { margin: 0.7rem 0 0; color: #8d2f2f; min-height: 1.2em; }
@@ -463,7 +518,7 @@
     #desk[hidden] { display: none; }
 
     @media (max-width: 640px) {
-      .masthead { padding: 2.1rem 0 1.6rem; }
+      .masthead { padding: 1.45rem 0 1.2rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -514,9 +569,15 @@
 
   <header class="masthead">
     <div class="wrap">
-      <p class="kicker">DEAL DESK</p>
+      <p class="kicker">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M4.8 12.5 12.1 5.2h6.4v6.4l-7.3 7.3a1.2 1.2 0 0 1-1.7 0l-4.7-4.7a1.2 1.2 0 0 1 0-1.7Z"/>
+          <circle cx="15.5" cy="8.6" r="1.15" fill="none" stroke="currentColor" stroke-width="1.7"/>
+        </svg>
+        省下來
+      </p>
       <h1>省錢情報</h1>
-      <p class="dek">還沒到期的台灣優惠，依類別放在同一張桌子上。過期的不會留在這頁。</p>
+      <p class="dek">還沒到期的台灣優惠。24 小時內要截止的，排在各類最上面。</p>
     </div>
   </header>
   <main>
@@ -598,8 +659,15 @@
       return now.getTime() >= end.getTime();
     }
 
-    function expiryLabel(value, now) {
-      if (value == null || value === "") return "";
+    function calendarDay(year, month, day) {
+      return Date.UTC(year, month - 1, day) / 86400000;
+    }
+
+    function expiryInfo(value, now) {
+      const empty = { text: "", tone: "", within24h: false, sort: Number.POSITIVE_INFINITY };
+      if (value == null || value === "") return empty;
+      const end = expiryInstant(value);
+      if (!end) return empty;
       const text = String(value).trim();
       const dateOnly = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text);
       let year;
@@ -614,9 +682,7 @@
         hour = 23;
         minute = 59;
       } else {
-        const parsed = new Date(text);
-        if (Number.isNaN(parsed.getTime())) return "";
-        const parts = taipeiParts(parsed);
+        const parts = taipeiParts(end);
         year = Number(parts.year);
         month = Number(parts.month);
         day = Number(parts.day);
@@ -626,10 +692,18 @@
       const today = taipeiParts(now);
       const isToday = Number(today.year) === year && Number(today.month) === month && Number(today.day) === day;
       const endOfDay = !!dateOnly || (hour === 23 && minute >= 59);
-      if (isToday && endOfDay) return "今天截止";
-      if (isToday) return `今天 ${pad(hour)}:${pad(minute)} 截止`;
-      if (endOfDay) return `到 ${month}/${day}`;
-      return `到 ${month}/${day} ${pad(hour)}:${pad(minute)}`;
+      const dayDiff = calendarDay(year, month, day) - calendarDay(Number(today.year), Number(today.month), Number(today.day));
+      const within24h = end.getTime() - now.getTime() <= 24 * 60 * 60 * 1000;
+      let label;
+      if (isToday && endOfDay) label = "今天截止";
+      else if (isToday) label = `今天 ${pad(hour)}:${pad(minute)} 截止`;
+      else if (endOfDay && dayDiff >= 1 && dayDiff <= 6) label = `剩 ${dayDiff} 天`;
+      else if (endOfDay) label = `到 ${month}/${day}`;
+      else label = `到 ${month}/${day} ${pad(hour)}:${pad(minute)}`;
+      let tone = "later";
+      if (within24h || isToday) tone = "urgent";
+      else if (dayDiff >= 1 && dayDiff <= 6) tone = "soon";
+      return { text: label, tone, within24h, sort: end.getTime() };
     }
 
     function formatUpdated(iso) {
@@ -739,16 +813,27 @@
       return element;
     }
 
+    function byDeadline(items, now) {
+      return items
+        .map((deal, index) => ({ deal, index, info: expiryInfo(deal.expires, now) }))
+        .sort((a, b) => {
+          if (a.info.within24h !== b.info.within24h) return a.info.within24h ? -1 : 1;
+          if (a.info.sort !== b.info.sort) return a.info.sort - b.info.sort;
+          return a.index - b.index;
+        });
+    }
+
     function makeDeal(deal, now) {
+      const info = expiryInfo(deal.expires, now);
       const item = document.createElement("li");
-      item.append(makeTitle(deal));
-      const label = expiryLabel(deal.expires, now);
-      if (label) {
+      if (info.tone === "urgent") item.classList.add("is-urgent");
+      if (info.text) {
         const expiry = document.createElement("p");
-        expiry.className = "expiry";
-        expiry.textContent = label;
+        expiry.className = `expiry is-${info.tone}`;
+        expiry.textContent = info.text;
         item.append(expiry);
       }
+      item.append(makeTitle(deal));
       const noteText = deal.note == null ? "" : String(deal.note);
       if (noteText) {
         const note = document.createElement("p");
@@ -775,7 +860,7 @@
       heading.append(mark, document.createTextNode(category.name));
       const list = document.createElement("ul");
       list.className = "deals";
-      for (const deal of items) list.append(makeDeal(deal, now));
+      for (const entry of byDeadline(items, now)) list.append(makeDeal(entry.deal, now));
       section.append(heading, list);
       return section;
     }

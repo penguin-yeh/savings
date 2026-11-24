@@ -8,7 +8,7 @@ GitHub Pages 從 `main` 根目錄提供這個網站：<https://penguin-yeh.githu
 
 **X Free Credits Finder** 和其他 bot 用 `scripts/deals.py` 維護清單。不要手改 `deals.json`。
 
-**改頁面或新增類別前，請先讀 [STYLE.md](STYLE.md)（「報社總編桌」）。**
+**改頁面或新增類別前，請先讀 [STYLE.md](STYLE.md)（「省錢」配色，不是連結總站那套報紙風）。**
 
 ## 本機預覽
 
