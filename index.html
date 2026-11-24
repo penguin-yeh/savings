@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="還沒到期的台灣優惠，依類別整理。過期的不會留在這頁。">
+  <meta name="robots" content="noindex">
+  <title>省錢情報</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="apple-mobile-web-app-title" content="省錢情報">
+  <meta name="theme-color" content="#1a1815">
+  <!--
+    省錢情報。改版面前先讀 STYLE.md。
+    優惠在 deals.json，請用 scripts/deals.py，不要手改。
+  -->
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #efe6d8;
+      --fg: #1c1915;
+      --muted: #6f655b;
+      --paper: #fbf7f1;
+      --line: #e3d5c2;
+      --mast: #1a1815;
+      --mast-fg: #f8f2e8;
+      --mast-muted: #c9baa6;
+      --gold: #e2b15a;
+      --serif: "Iowan Old Style", Palatino, "Palatino Linotype", "Songti TC", "Noto Serif TC", "PMingLiU", serif;
+      --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --bg: #100f0d;
+        --fg: #f4efe6;
+        --muted: #b7ab9c;
+        --paper: #1b1a17;
+        --line: #34302a;
+        --mast: #070706;
+        --mast-fg: #f7f2ea;
+        --mast-muted: #b7ab9c;
+        --gold: #e2b15a;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--sans);
+      line-height: 1.5;
+    }
+
+    .svg-sprite {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .masthead {
+      background: var(--mast);
+      color: var(--mast-fg);
+      padding: 2.8rem 1.25rem 2.2rem;
+    }
+
+    .wrap {
+      width: min(48rem, 100%);
+      margin: 0 auto;
+      padding: 0 1.2rem;
+    }
+
+    .kicker {
+      margin: 0 0 0.7rem;
+      color: var(--gold);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(2.15rem, 6vw, 3.25rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+    }
+
+    .dek {
+      max-width: 34rem;
+      margin: 0.85rem 0 0;
+      color: var(--mast-muted);
+      font-size: 0.98rem;
+    }
+
+    main { padding: 1.25rem 0 4rem; }
+
+    .status { color: var(--muted); margin: 0 0 0.8rem; }
+
+    .updated {
+      margin: 0 0 0.75rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .chips-bar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      margin: 0 0 1rem;
+      padding: 0.55rem 0 0.65rem;
+      background: var(--bg);
+    }
+
+    .chips {
+      display: flex;
+      gap: 0.45rem;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      list-style: none;
+      scrollbar-width: none;
+    }
+
+    .chips::-webkit-scrollbar { display: none; }
+
+    .chip {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex: none;
+      border-radius: 999px;
+      padding: 0.22rem 0.72rem 0.22rem 0.22rem;
+      background: var(--fill);
+      color: var(--ink);
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    a.chip,
+    a.chip:visited { color: var(--ink); }
+
+    a.chip:hover { text-decoration: underline; text-underline-offset: 0.16em; }
+
+    a.chip:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .mark {
+      display: grid;
+      place-items: center;
+      flex: none;
+      background: var(--mark);
+      color: var(--mark-ink);
+    }
+
+    .mark svg { display: block; width: 1.15rem; height: 1.15rem; }
+
+    .chip .mark {
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: 999px;
+    }
+
+    .chip .mark svg { width: 0.95rem; height: 0.95rem; }
+
+    .group {
+      margin: 0 0 1.35rem;
+      scroll-margin-top: 3.6rem;
+      min-width: 0;
+    }
+
+    .group h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin: 0 0 0.7rem;
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .group h2 .mark {
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 0.7rem;
+    }
+
+    .group h2 .mark svg { width: 1.25rem; height: 1.25rem; }
+
+    .deals {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .deals li {
+      background: var(--fill);
+      color: var(--ink);
+      border-radius: 1rem;
+      padding: 0.9rem 1rem;
+      margin: 0 0 0.65rem;
+      min-width: 0;
+    }
+
+    .title-link {
+      color: var(--ink);
+      font-size: 1.02rem;
+      font-weight: 700;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+    }
+
+    a.title-link:hover { text-decoration: underline; text-underline-offset: 0.18em; }
+
+    a.title-link:focus-visible,
+    .note a:focus-visible {
+      outline: 2px solid var(--mark);
+      outline-offset: 3px;
+      border-radius: 0.3rem;
+    }
+
+    .expiry {
+      display: inline-block;
+      margin: 0.4rem 0 0;
+      padding: 0.08rem 0.5rem;
+      border: 1px solid var(--hairline);
+      border-radius: 999px;
+      color: var(--soft);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .note {
+      margin: 0.4rem 0 0;
+      color: var(--soft);
+      font-size: 0.92rem;
+      overflow-wrap: anywhere;
+    }
+
+    .note a {
+      color: var(--mark);
+      font-weight: 700;
+      text-underline-offset: 0.15em;
+    }
+
+    .cat-ai {
+      --fill: #efe6fb;
+      --ink: #3b1768;
+      --soft: #5c4780;
+      --mark: #5b21b6;
+      --mark-ink: #f7f4ff;
+      --hairline: rgba(91, 33, 182, 0.2);
+    }
+
+    .cat-mall {
+      --fill: #fde8e4;
+      --ink: #6a2418;
+      --soft: #8a4e42;
+      --mark: #b42318;
+      --mark-ink: #fff6f4;
+      --hairline: rgba(180, 35, 24, 0.2);
+    }
+
+    .cat-home {
+      --fill: #eef3dc;
+      --ink: #2f3a14;
+      --soft: #55633a;
+      --mark: #4d6216;
+      --mark-ink: #f7faee;
+      --hairline: rgba(77, 98, 22, 0.22);
+    }
+
+    .cat-eat {
+      --fill: #fde7f0;
+      --ink: #6d143c;
+      --soft: #8d4564;
+      --mark: #be185d;
+      --mark-ink: #fff5f8;
+      --hairline: rgba(190, 24, 93, 0.2);
+    }
+
+    .cat-soft {
+      --fill: #e6ebf8;
+      --ink: #1c2d62;
+      --soft: #4a5b86;
+      --mark: #243e9c;
+      --mark-ink: #f4f7ff;
+      --hairline: rgba(36, 62, 156, 0.2);
+    }
+
+    .cat-health {
+      --fill: #e5f6ea;
+      --ink: #14532d;
+      --soft: #3d6b4c;
+      --mark: #166534;
+      --mark-ink: #f3fbf5;
+      --hairline: rgba(22, 101, 52, 0.2);
+    }
+
+    .cat-card {
+      --fill: #f8f0dc;
+      --ink: #5c3a0c;
+      --soft: #7d6240;
+      --mark: #8a5a10;
+      --mark-ink: #fff8ee;
+      --hairline: rgba(138, 90, 16, 0.22);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .cat-ai {
+        --fill: #2a2140;
+        --ink: #efe6ff;
+        --soft: #cbbcf0;
+        --mark: #c4b5fd;
+        --mark-ink: #241838;
+        --hairline: rgba(196, 181, 253, 0.3);
+      }
+
+      .cat-mall {
+        --fill: #3a221c;
+        --ink: #ffe4dc;
+        --soft: #f0b8aa;
+        --mark: #f0a090;
+        --mark-ink: #3a1812;
+        --hairline: rgba(240, 160, 144, 0.3);
+      }
+
+      .cat-home {
+        --fill: #242916;
+        --ink: #eef3d4;
+        --soft: #c9d4a4;
+        --mark: #d4e08a;
+        --mark-ink: #1c220e;
+        --hairline: rgba(212, 224, 138, 0.3);
+      }
+
+      .cat-eat {
+        --fill: #3a1828;
+        --ink: #fde8f2;
+        --soft: #f0b8cc;
+        --mark: #f0a0c4;
+        --mark-ink: #3a1424;
+        --hairline: rgba(240, 160, 196, 0.3);
+      }
+
+      .cat-soft {
+        --fill: #1a2340;
+        --ink: #e6ecff;
+        --soft: #b7c4ee;
+        --mark: #b4c2f5;
+        --mark-ink: #141b33;
+        --hairline: rgba(180, 194, 245, 0.3);
+      }
+
+      .cat-health {
+        --fill: #14281c;
+        --ink: #def6e6;
+        --soft: #a9d4b8;
+        --mark: #86efac;
+        --mark-ink: #102016;
+        --hairline: rgba(134, 239, 172, 0.28);
+      }
+
+      .cat-card {
+        --fill: #332616;
+        --ink: #fbe7c4;
+        --soft: #e2c8a0;
+        --mark: #f0c27a;
+        --mark-ink: #2a1c0c;
+        --hairline: rgba(240, 194, 122, 0.3);
+      }
+    }
+
+    .gate { margin: 0 auto 1.25rem; max-width: 22rem; }
+    .gate[hidden] { display: none; }
+    .gate form {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 1.35rem;
+      padding: 1.15rem;
+    }
+    .gate h2 {
+      margin: 0 0 0.85rem;
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 600;
+    }
+    .gate label { display: block; margin-bottom: 0.4rem; font-size: 0.88rem; color: var(--muted); }
+    .gate input {
+      width: 100%;
+      min-height: 2.75rem;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid var(--line);
+      border-radius: 0.7rem;
+      background: var(--bg);
+      color: var(--fg);
+      font: inherit;
+    }
+    .gate button {
+      width: 100%;
+      min-height: 2.75rem;
+      margin-top: 0.7rem;
+      border: 0;
+      border-radius: 999px;
+      background: var(--mast);
+      color: var(--mast-fg);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .gate button:disabled { opacity: 0.6; cursor: default; }
+    .gate input:focus-visible,
+    .gate button:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+    .gate-error { margin: 0.7rem 0 0; color: #8d2f2f; min-height: 1.2em; }
+    @media (prefers-color-scheme: dark) {
+      .gate-error { color: #f0b4b4; }
+    }
+
+    #desk[hidden] { display: none; }
+
+    @media (max-width: 640px) {
+      .masthead { padding: 2.1rem 0 1.6rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-ai" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M12 3.2 13.4 8.2 18.4 9.6 13.4 11 12 16 10.6 11 5.6 9.6 10.6 8.2Z"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m17.2 14.4.7 2.1 2.1.7-2.1.7-.7 2.1-.7-2.1-2.1-.7 2.1-.7Z"/>
+    </symbol>
+    <symbol id="icon-mall" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M6.2 8.4h11.6l-.9 11.1H7.1Z"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M9 8.4V6.7A3 3 0 0 1 12 3.7a3 3 0 0 1 3 3v1.7"/>
+    </symbol>
+    <symbol id="icon-home" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m4 11 8-6.5L20 11"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M7 10.4V19h10v-8.6"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M10.2 19v-4.5h3.6V19"/>
+    </symbol>
+    <symbol id="icon-eat" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M8 3.4v6.2"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M5.8 3.6v4.6c0 1.3.9 2.2 2.2 2.2s2.2-.9 2.2-2.2V3.6"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M8 10.4V20.4"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M16.2 3.6c1.5 1.8 2.1 3.4 2.1 5 0 1.7-1 2.9-2.1 3.3V20.4"/>
+    </symbol>
+    <symbol id="icon-soft" viewBox="0 0 24 24">
+      <rect x="3.4" y="4.4" width="17.2" height="12" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M8 20.2h8M12 16.4v3.8"/>
+    </symbol>
+    <symbol id="icon-health" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M12 8.2v7.6M8.2 12h7.6"/>
+    </symbol>
+    <symbol id="icon-card" viewBox="0 0 24 24">
+      <rect x="3.2" y="5.4" width="17.6" height="13" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M3.2 9.4h17.6M6.6 14.2h4.2"/>
+    </symbol>
+  </svg>
+
+  <header class="masthead">
+    <div class="wrap">
+      <p class="kicker">DEAL DESK</p>
+      <h1>省錢情報</h1>
+      <p class="dek">還沒到期的台灣優惠，依類別放在同一張桌子上。過期的不會留在這頁。</p>
+    </div>
+  </header>
+  <main>
+    <div class="wrap">
+      <section id="gate" class="gate">
+        <form id="gate-form">
+          <h2>輸入密碼</h2>
+          <label for="gate-password">密碼</label>
+          <input id="gate-password" type="password" name="password" autocomplete="current-password" required>
+          <button type="submit">進入</button>
+          <p id="gate-error" class="gate-error" hidden>密碼不對</p>
+        </form>
+      </section>
+      <div id="desk" hidden>
+        <p id="updated" class="updated"></p>
+        <div class="chips-bar">
+          <nav id="chips" class="chips" aria-label="分類"></nav>
+        </div>
+        <p id="empty" class="status" hidden>目前沒有還沒到期的優惠。</p>
+        <p id="status" class="status" hidden></p>
+        <div id="sections"></div>
+      </div>
+      <noscript><p class="status">需要開啟 JavaScript 才能看還沒到期的優惠。</p></noscript>
+    </div>
+  </main>
+  <script>
+    const CATEGORIES = [
+      { name: "AI 免費額度", id: "cat-ai", className: "cat-ai", icon: "icon-ai" },
+      { name: "電商檔期", id: "cat-mall", className: "cat-mall", icon: "icon-mall" },
+      { name: "居家生活", id: "cat-home", className: "cat-home", icon: "icon-home" },
+      { name: "吃喝", id: "cat-eat", className: "cat-eat", icon: "icon-eat" },
+      { name: "軟體訂閱", id: "cat-soft", className: "cat-soft", icon: "icon-soft" },
+      { name: "保健／海外", id: "cat-health", className: "cat-health", icon: "icon-health" },
+      { name: "刷卡回饋", id: "cat-card", className: "cat-card", icon: "icon-card" },
+    ];
+
+    const NOTE_LINK = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+
+    function taipeiParts(date) {
+      const fmt = new Intl.DateTimeFormat("en-US", {
+        timeZone: "Asia/Taipei",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hourCycle: "h23",
+      });
+      const bag = {};
+      for (const part of fmt.formatToParts(date)) {
+        if (part.type !== "literal") bag[part.type] = part.value;
+      }
+      if (bag.hour === "24") bag.hour = "00";
+      return bag;
+    }
+
+    function pad(value) {
+      return String(value).padStart(2, "0");
+    }
+
+    function expiryInstant(value) {
+      if (value == null || value === "") return null;
+      const text = String(value).trim();
+      const dateOnly = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text);
+      if (dateOnly) {
+        const year = Number(dateOnly[1]);
+        const month = Number(dateOnly[2]);
+        const day = Number(dateOnly[3]);
+        return new Date(Date.UTC(year, month - 1, day, 16, 0, 0));
+      }
+      const parsed = new Date(text);
+      if (Number.isNaN(parsed.getTime())) return null;
+      return parsed;
+    }
+
+    function isExpired(value, now) {
+      const end = expiryInstant(value);
+      if (!end) return false;
+      return now.getTime() >= end.getTime();
+    }
+
+    function expiryLabel(value, now) {
+      if (value == null || value === "") return "";
+      const text = String(value).trim();
+      const dateOnly = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text);
+      let year;
+      let month;
+      let day;
+      let hour;
+      let minute;
+      if (dateOnly) {
+        year = Number(dateOnly[1]);
+        month = Number(dateOnly[2]);
+        day = Number(dateOnly[3]);
+        hour = 23;
+        minute = 59;
+      } else {
+        const parsed = new Date(text);
+        if (Number.isNaN(parsed.getTime())) return "";
+        const parts = taipeiParts(parsed);
+        year = Number(parts.year);
+        month = Number(parts.month);
+        day = Number(parts.day);
+        hour = Number(parts.hour);
+        minute = Number(parts.minute);
+      }
+      const today = taipeiParts(now);
+      const isToday = Number(today.year) === year && Number(today.month) === month && Number(today.day) === day;
+      const endOfDay = !!dateOnly || (hour === 23 && minute >= 59);
+      if (isToday && endOfDay) return "今天截止";
+      if (isToday) return `今天 ${pad(hour)}:${pad(minute)} 截止`;
+      if (endOfDay) return `到 ${month}/${day}`;
+      return `到 ${month}/${day} ${pad(hour)}:${pad(minute)}`;
+    }
+
+    function formatUpdated(iso) {
+      const parsed = new Date(iso);
+      if (Number.isNaN(parsed.getTime())) return "";
+      const parts = taipeiParts(parsed);
+      return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute}`;
+    }
+
+    function icon(id) {
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("aria-hidden", "true");
+      const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+      use.setAttribute("href", "#" + id);
+      svg.append(use);
+      return svg;
+    }
+
+    function fillNote(element, note) {
+      element.replaceChildren();
+      NOTE_LINK.lastIndex = 0;
+      let last = 0;
+      for (const match of note.matchAll(NOTE_LINK)) {
+        if (match.index > last) element.append(document.createTextNode(note.slice(last, match.index)));
+        const link = document.createElement("a");
+        link.href = match[2];
+        link.rel = "noopener noreferrer";
+        link.textContent = match[1];
+        element.append(link);
+        last = match.index + match[0].length;
+      }
+      if (last < note.length) element.append(document.createTextNode(note.slice(last)));
+    }
+
+    function makeChip(category) {
+      const link = document.createElement("a");
+      link.className = category.className ? `chip ${category.className}` : "chip";
+      link.href = `#${category.id}`;
+      const mark = document.createElement("span");
+      mark.className = "mark";
+      mark.append(icon(category.icon));
+      link.append(mark, document.createTextNode(category.name));
+      return link;
+    }
+
+    function makeTitle(deal) {
+      const href = String(deal.href || "");
+      const safe = /^https?:\/\//i.test(href);
+      const element = document.createElement(safe ? "a" : "span");
+      element.className = "title-link";
+      if (safe) {
+        element.href = href;
+        element.rel = "noopener noreferrer";
+      }
+      element.textContent = String(deal.title || "");
+      return element;
+    }
+
+    function makeDeal(deal, now) {
+      const item = document.createElement("li");
+      item.append(makeTitle(deal));
+      const label = expiryLabel(deal.expires, now);
+      if (label) {
+        const expiry = document.createElement("p");
+        expiry.className = "expiry";
+        expiry.textContent = label;
+        item.append(expiry);
+      }
+      const noteText = deal.note == null ? "" : String(deal.note);
+      if (noteText) {
+        const note = document.createElement("p");
+        note.className = "note";
+        fillNote(note, noteText);
+        item.append(note);
+      }
+      return item;
+    }
+
+    function makeSection(category, items, now) {
+      const section = document.createElement("section");
+      section.id = category.id;
+      section.className = category.className ? `group ${category.className}` : "group";
+      const heading = document.createElement("h2");
+      const mark = document.createElement("span");
+      mark.className = "mark";
+      mark.append(icon(category.icon));
+      heading.append(mark, document.createTextNode(category.name));
+      const list = document.createElement("ul");
+      list.className = "deals";
+      for (const deal of items) list.append(makeDeal(deal, now));
+      section.append(heading, list);
+      return section;
+    }
+
+    function render(deals) {
+      const now = new Date();
+      const visible = [];
+      let newest = "";
+      for (const deal of deals) {
+        if (!deal || typeof deal !== "object") continue;
+        const added = typeof deal.added === "string" ? deal.added : "";
+        if (added > newest) newest = added;
+        if (isExpired(deal.expires, now)) continue;
+        visible.push(deal);
+      }
+
+      const when = newest ? formatUpdated(newest) : "";
+      document.getElementById("updated").textContent = when
+        ? `最後更新 ${when}（台北） · ${visible.length} 則`
+        : `最後更新 — · ${visible.length} 則`;
+
+      const groups = new Map(CATEGORIES.map((category) => [category.name, []]));
+      const extras = [];
+      for (const deal of visible) {
+        const name = String(deal.category || "");
+        if (groups.has(name)) groups.get(name).push(deal);
+        else extras.push(deal);
+      }
+
+      const chips = document.getElementById("chips");
+      const sections = document.getElementById("sections");
+      chips.replaceChildren();
+      sections.replaceChildren();
+
+      let count = 0;
+      for (const category of CATEGORIES) {
+        const items = groups.get(category.name);
+        if (!items.length) continue;
+        count += 1;
+        chips.append(makeChip(category));
+        sections.append(makeSection(category, items, now));
+      }
+      if (extras.length) {
+        const category = { name: "其他", id: "cat-extra", className: "", icon: "icon-card" };
+        chips.append(makeChip(category));
+        sections.append(makeSection(category, extras, now));
+        count += 1;
+      }
+
+      document.querySelector(".chips-bar").hidden = count === 0;
+      document.getElementById("empty").hidden = count !== 0;
+    }
+
+    async function loadDeals() {
+      const status = document.getElementById("status");
+      status.hidden = true;
+      try {
+        const response = await fetch("deals.json", { cache: "no-store" });
+        if (!response.ok) throw new Error(String(response.status));
+        const data = await response.json();
+        if (!Array.isArray(data)) throw new Error("format");
+        render(data);
+      } catch (error) {
+        status.hidden = false;
+        status.textContent = "讀不到優惠清單。";
+      }
+    }
+
+    const GATE_SALT = "mv24FYlAQXqzWPt+kNbhdw==";
+    const GATE_ITERATIONS = 200000;
+    const GATE_HASH = "3xAExdNY8/ArB2V6OVaNLkCIqCfvftk81PIMvdj9sIM=";
+    const GATE_KEY = "link-hub-gate";
+
+    function gateBytes(b64) {
+      const bin = atob(b64);
+      const out = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i += 1) out[i] = bin.charCodeAt(i);
+      return out;
+    }
+
+    function remembered() {
+      try { return localStorage.getItem(GATE_KEY) === GATE_HASH; }
+      catch (error) { return false; }
+    }
+
+    function remember() {
+      try { localStorage.setItem(GATE_KEY, GATE_HASH); }
+      catch (error) { /* 私密模式就每次再問 */ }
+    }
+
+    async function passwordMatches(password) {
+      const material = await crypto.subtle.importKey(
+        "raw",
+        new TextEncoder().encode(password),
+        "PBKDF2",
+        false,
+        ["deriveBits"]
+      );
+      const bits = await crypto.subtle.deriveBits({
+        name: "PBKDF2",
+        salt: gateBytes(GATE_SALT),
+        iterations: GATE_ITERATIONS,
+        hash: "SHA-256",
+      }, material, 256);
+      const got = new Uint8Array(bits);
+      const expected = gateBytes(GATE_HASH);
+      if (got.length !== expected.length) return false;
+      let diff = 0;
+      for (let i = 0; i < got.length; i += 1) diff |= got[i] ^ expected[i];
+      return diff === 0;
+    }
+
+    function openDesk() {
+      document.getElementById("gate").hidden = true;
+      document.getElementById("desk").hidden = false;
+      loadDeals();
+    }
+
+    const gateForm = document.getElementById("gate-form");
+    gateForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const input = document.getElementById("gate-password");
+      const error = document.getElementById("gate-error");
+      const button = gateForm.querySelector("button");
+      error.hidden = true;
+      button.disabled = true;
+      try {
+        const ok = await passwordMatches(input.value);
+        if (!ok) {
+          error.hidden = false;
+          input.focus();
+          return;
+        }
+        input.value = "";
+        remember();
+        openDesk();
+      } catch (gateError) {
+        error.hidden = false;
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    if (remembered()) openDesk();
+  </script>
+</body>
+</html>
