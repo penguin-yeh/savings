@@ -3,7 +3,7 @@
     "id": "renoise-200",
     "category": "AI 免費額度",
     "title": "Renoise $200 額度抽 2 人",
-    "note": "追蹤 @renoiseai 並轉推（官方帳號，AI 影片）",
+    "note": "追蹤 @renoiseai 並轉推，AI 影片工具官方帳號",
     "href": "https://x.com/renoiseai/status/2125263159816827176",
     "expires": null,
     "added": "2026-11-25T01:50:00+08:00"
@@ -12,7 +12,7 @@
     "id": "spiral",
     "category": "AI 免費額度",
     "title": "Spiral 免費額度",
-    "note": "轉推並留言（官方帳號，沒寫額度多少）",
+    "note": "轉推並留言，官方帳號，額度未說明",
     "href": "https://x.com/spiraldotai/status/2125273409848533178",
     "expires": null,
     "added": "2026-11-25T01:50:00+08:00"
@@ -21,16 +21,16 @@
     "id": "elevenlabs-huedini",
     "category": "AI 免費額度",
     "title": "ElevenLabs Huedini 11k 額度",
-    "note": "用 Huedini 做一張作品、引用轉推，再留言「hue」，11/25 晚上 11 點左右截止（ElevenLabs 社群小編發的）",
+    "note": "用 Huedini 做作品、引用轉推並留言「hue」",
     "href": "https://x.com/alecwilcock/status/2125245858136383799",
-    "expires": "2026-11-25T23:00:00+08:00",
+    "expires": "2026-11-25T23:11:00+08:00",
     "added": "2026-11-25T01:50:00+08:00"
   },
   {
     "id": "aihubmix-5",
     "category": "AI 免費額度",
     "title": "AIHubMix $5 API 額度抽 5 人",
-    "note": "追蹤並轉推（小型 API 轉售平台）",
+    "note": "追蹤並轉推，小型 API 轉售平台",
     "href": "https://x.com/AiHubMix/status/2124753750174908887",
     "expires": null,
     "added": "2026-11-25T01:50:00+08:00"
@@ -48,16 +48,16 @@
     "id": "shopee-1125",
     "category": "電商檔期",
     "title": "蝦皮 11/25 商城狂購節",
-    "note": "全站滿 100 折 50，代碼 SHO25NOV 滿 100 折 20，今天限定",
+    "note": "全站滿 100 折 50，代碼 SHO25NOV 滿 100 折 20",
     "href": "https://shopee.tw/m/shopee-mall-sale",
-    "expires": "2026-11-25",
+    "expires": "2026-11-25T23:59:00+08:00",
     "added": "2026-11-25T01:50:00+08:00"
   },
   {
     "id": "momo-bf",
     "category": "電商檔期",
     "title": "momo 黑五購物節",
-    "note": "至 11/30，每晚 21:00 滿額登記送 mo 點",
+    "note": "每晚 21:00–23:59 滿額登記送 mo 點，超取滿 290 免運",
     "href": "https://www.momoshop.com.tw/edm/cmmedm.jsp?lpn=O7BnxyFfXGw&n=1",
     "expires": "2026-11-30",
     "added": "2026-11-25T01:50:00+08:00"
@@ -65,8 +65,8 @@
   {
     "id": "pchome-24power",
     "category": "電商檔期",
-    "title": "PChome 24力會員日",
-    "note": "今晚 23:59 截止，收納晾曬滿 1,411 折 211",
+    "title": "PChome 24力會員日黑五狂省節",
+    "note": "收納晾曬滿 1,411 折 211，先登入領券",
     "href": "https://24h.pchome.com.tw/activity/24power",
     "expires": "2026-11-25T23:59:00+08:00",
     "added": "2026-11-25T01:50:00+08:00"
@@ -75,25 +75,25 @@
     "id": "pinkoi-bf",
     "category": "電商檔期",
     "title": "Pinkoi 黑五 App 滿 3,200 折 200",
-    "note": "至 11/30",
+    "note": "App 結帳選活動優惠折抵，每帳號 1 次",
     "href": "https://pinkoi.zendesk.com/hc/zh-tw/articles/64286975807129",
-    "expires": "2026-11-30",
+    "expires": "2026-11-30T23:59:00+08:00",
     "added": "2026-11-25T01:50:00+08:00"
   },
   {
     "id": "costco-bf",
     "category": "居家生活",
     "title": "好市多黑色購物節",
-    "note": "賣場至 12/6，線上至 11/29，11/27 線上滿 8,800 折 880（[今日清單](https://www.gvm.com.tw/article/134556)）",
+    "note": "賣場至 12/6，線上至 11/29，11/27 線上滿 8,800 折 880",
     "href": "https://www.costco.com.tw/blackfriday",
-    "expires": null,
+    "expires": "2026-12-06",
     "added": "2026-11-25T01:50:00+08:00"
   },
   {
     "id": "ikea-family",
     "category": "居家生活",
     "title": "IKEA Family 年終快閃 家飾 9 折",
-    "note": "限門市，至 11/30",
+    "note": "限宜家卡友、實體門市現貨",
     "href": "https://www.ikea.com.tw/zh/family/year-end-sale",
     "expires": "2026-11-30",
     "added": "2026-11-25T01:50:00+08:00"
@@ -102,7 +102,7 @@
     "id": "pxmart-anniversary",
     "category": "居家生活",
     "title": "全聯超級週年慶",
-    "note": "300 款以上憑卡買一送一起，至 12/3",
+    "note": "300 款以上憑卡買 1 送 1 起",
     "href": "https://www.pxmart.com.tw/campaign/life-will/topic/%E8%B6%85%E7%B4%9A%E9%80%B1%E5%B9%B4%E6%85%B6",
     "expires": "2026-12-03",
     "added": "2026-11-25T01:50:00+08:00"
@@ -111,7 +111,7 @@
     "id": "seven-eleven-bf",
     "category": "吃喝",
     "title": "7-11 黑五寄杯 520 元組合",
-    "note": "OPENPOINT App，至 11/30 或售完",
+    "note": "OPENPOINT App 行動隨時取，限量售完為止",
     "href": "https://www.nownews.com/news/6894967",
     "expires": "2026-11-30",
     "added": "2026-11-25T01:50:00+08:00"
@@ -120,16 +120,25 @@
     "id": "familymart-bogo",
     "category": "吃喝",
     "title": "全家 App 咖啡茶飲買一送一",
-    "note": "今天截止；萊爾富買一送一至 12/8",
+    "note": "優惠趣大美式／拿鐵等買 1 送 1",
     "href": "https://www.nownews.com/news/6894967",
-    "expires": null,
+    "expires": "2026-11-25T23:59:00+08:00",
     "added": "2026-11-25T01:50:00+08:00"
+  },
+  {
+    "id": "hilife-coffee-bogo",
+    "category": "吃喝",
+    "title": "萊爾富特大杯咖啡買一送一",
+    "note": "特濃美式／拿鐵／重乳拿鐵",
+    "href": "https://www.nownews.com/news/6894967",
+    "expires": "2026-12-08",
+    "added": "2026-11-25T02:03:59+08:00"
   },
   {
     "id": "google-ai-pro",
     "category": "軟體訂閱",
     "title": "Google AI Pro 舊戶年繳最高 5 折",
-    "note": "至 11/26，依帳號而異",
+    "note": "到 Google One 方案頁看是否有優惠價，依帳號而異",
     "href": "https://one.google.com/about/",
     "expires": "2026-11-26",
     "added": "2026-11-25T01:50:00+08:00"
@@ -138,7 +147,7 @@
     "id": "adobe-cc",
     "category": "軟體訂閱",
     "title": "Adobe CC Pro 首年 4 折",
-    "note": "新訂閱，至 11/27",
+    "note": "限首次直接訂閱，個人版首年 NT$924／月",
     "href": "https://www.adobe.com/tw/products/special-offers.html",
     "expires": "2026-11-27",
     "added": "2026-11-25T01:50:00+08:00"
@@ -147,25 +156,34 @@
     "id": "tradingview-bf",
     "category": "軟體訂閱",
     "title": "TradingView 年繳送 1 個月",
-    "note": "黑五至 11/28",
+    "note": "網頁版購買才有，記得關自動續訂",
     "href": "https://tw.tradingview.com/black-friday/",
-    "expires": "2026-11-28",
+    "expires": "2026-11-28T16:00:00+08:00",
     "added": "2026-11-25T01:50:00+08:00"
   },
   {
     "id": "surfshark-bf",
     "category": "軟體訂閱",
     "title": "Surfshark 黑五兩年方案",
-    "note": "至 12/1；[NordVPN 黑五](https://nordvpn.com/zh-tw/black-friday/)：至 12/9",
+    "note": "One 方案每月 NT$78，含加送 3 個月",
     "href": "https://surfshark.com/zh-tw/black-friday",
-    "expires": null,
+    "expires": "2026-12-01",
     "added": "2026-11-25T01:50:00+08:00"
+  },
+  {
+    "id": "nordvpn-black-friday",
+    "category": "軟體訂閱",
+    "title": "NordVPN 黑五 2 年方案",
+    "note": "最高現折 78%，再送 3 個月",
+    "href": "https://nordvpn.com/zh-tw/black-friday/",
+    "expires": "2026-12-09",
+    "added": "2026-11-25T02:03:59+08:00"
   },
   {
     "id": "iherb-novapac26",
     "category": "保健／海外",
     "title": "iHerb 代碼 NOVAPAC26 最高 7 折",
-    "note": "至 11/26 02:00",
+    "note": "結帳輸入代碼，可寄台灣",
     "href": "https://tw.iherb.com/info/sales-and-offers",
     "expires": "2026-11-26T02:00:00+08:00",
     "added": "2026-11-25T01:50:00+08:00"
@@ -173,10 +191,10 @@
   {
     "id": "card-bf-roundup",
     "category": "刷卡回饋",
-    "title": "momo／PChome 黑五銀行加碼整理",
-    "note": "多數要先登錄",
+    "title": "momo 黑五銀行加碼",
+    "note": "富邦、玉山、永豐、國泰、星展，多數要先登錄",
     "href": "https://news.tvbs.com.tw/life/4053450",
-    "expires": null,
+    "expires": "2026-11-30",
     "added": "2026-11-25T01:50:00+08:00"
   }
 ]

@@ -13,7 +13,7 @@
 1. 單檔自含：`index.html` 內含 CSS 與 JS。優惠由同目錄的 `deals.json` 載入。不載外部字型、CSS、CDN。主畫面圖示與 `site.webmanifest` 用同目錄的檔案。
 2. 淺色與深色都要有（`prefers-color-scheme`），每個類別的顏色兩種模式都要定義。
 3. 不准：漸層、`box-shadow`、`backdrop-filter`。圓角維持現有大小（卡片 0.85rem、標籤與截止徽章 999px、密碼框 1.35rem），不要自己放大。
-4. 手機（約 390px）優先，不可橫向捲動。分類標籤列可以在自己那一列裡橫向滑，整頁不行。
+4. 手機（約 390px）優先，不可橫向捲動。分類分頁列可以在自己那一列裡橫向滑，整頁不行。
 5. 類別只能出現在 `scripts/deals.py` 的 `CATEGORIES` 裡；前端清單（`CATEGORIES` 陣列）與它要同步，名稱與順序都要一致。`保健／海外` 的斜線是全形 `／`。
 6. 外部連結維持純 `<a href rel="noopener noreferrer">`，不加 `target`。說明裡的 `[文字](網址)` 也一樣，只允許 `http`／`https`。
 
@@ -76,8 +76,8 @@
 ## 4. 版面與截止徽章
 
 - 解鎖後才畫清單。上方一行「最後更新」（台北時間，取 `deals.json` 裡最新的 `added`）和還在顯示的則數。
-- 分類標籤貼在畫面上方（`position: sticky; top: 0`），底色用 `--bg`，點了捲到該區。沒有還沒到期項目的類別不出現。
-- 每個類別一個 `<section>`：彩色標籤（圖示加名稱），下面每則是一張卡片。標題是連結，截止徽章在標題上面，說明在下面。說明裡若有連結，標題連結不要包住說明。
+- 分類是貼頂分頁（`position: sticky; top: 0`，底色 `--bg`），不是往下捲的目錄。第一個是「全部」，後面只放還有還沒到期項目的類別，順序與 `CATEGORIES` 相同。點一個類別只顯示那一類；「全部」則依序顯示每一類，每類仍有自己的彩色標籤。選到的分頁寫進網址 hash（`#all`、`#cat-ai` 這類），重新整理或分享連結會回到同一個分頁。沒有對上的 hash 回到「全部」。分頁按鈕 id 加 `tab-`、區塊 id 加 `panel-`，頁面上不要有跟 hash 同名的元素，避免瀏覽器自己捲過去。
+- 每個類別一個 `<section>`：彩色標籤（圖示加名稱），下面每則是一張卡片。單一類別的分頁也留著這個標題。標題是連結，截止徽章在標題上面，說明在下面。說明裡若有連結，標題連結不要包住說明。
 - 渲染當下已過期的項目直接不畫。同一區裡，**24 小時內要截止的排最前**（比較早的在上），其餘依截止時間由近到遠，`expires` 是 null 的放最後、維持原順序。
 - 截止徽章用 `.expiry`，再加一個語氣 class。只有日期、或時間是 23:59，視為那天結束，不另外寫鐘點。`expires` 是 null 就不顯示徽章。
 
@@ -93,7 +93,7 @@
 ## 5. 新增類別的完整步驟
 
 1. `scripts/deals.py` 的 `CATEGORIES` 加上名稱（決定區塊順序）。
-2. `index.html` 的 `CATEGORIES` 陣列加一筆：`{ name, id, className: "cat-xxx", icon: "icon-xxx" }`，順序與第 1 步一致。`id` 用在標籤的 `#` 錨點。
+2. `index.html` 的 `CATEGORIES` 陣列加一筆：`{ name, id, className: "cat-xxx", icon: "icon-xxx" }`，順序與第 1 步一致。`id` 用在分頁 hash（`#cat-ai`）。分頁按鈕 id 加 `tab-`、區塊 id 加 `panel-`。
 3. 在淺色區塊加 `.cat-xxx { … }`，並在 `@media (prefers-color-scheme: dark)` 區塊加深色版。
 4. 在 SVG sprite 加 `<symbol id="icon-xxx">`：單色線條、`stroke="currentColor"`、`stroke-width="1.7"`、圓角線頭。
 5. README 的類別清單同步。
@@ -106,6 +106,7 @@
 - [ ] 截止徽章分緊急、即將、較遠，24 小時內的排在該類最前。
 - [ ] 淺色與深色都有定義，且文字對比足夠。
 - [ ] `deals.py` 與前端的類別清單、順序一致，含 `保健／海外` 的全形斜線。
+- [ ] 分類是分頁（含「全部」）。沒有優惠的類別不出現。選到的分頁寫在 hash。390px 分頁列可橫滑，整頁不橫向捲動。
 - [ ] 390px 寬度無橫向捲動；沒有外部字型、CSS 或 CDN。
 - [ ] 外部連結是 `<a rel="noopener noreferrer">`，沒有 `target`。
 - [ ] 沒有漸層、`box-shadow`、`backdrop-filter`。

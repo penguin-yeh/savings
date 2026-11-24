@@ -168,14 +168,24 @@
       align-items: center;
       gap: 0.45rem;
       flex: none;
+      min-height: 2.5rem;
+      border: 1px solid transparent;
       border-radius: 999px;
-      padding: 0.22rem 0.72rem 0.22rem 0.22rem;
+      padding: 0.28rem 0.85rem 0.28rem 0.28rem;
       background: var(--fill);
       color: var(--ink);
       font-size: 0.82rem;
       font-weight: 700;
       white-space: nowrap;
       text-decoration: none;
+    }
+
+    .chip-all {
+      --fill: var(--paper);
+      --ink: var(--fg);
+      --mark: var(--mast);
+      --mark-ink: var(--mast-fg);
+      border-color: var(--line);
     }
 
     a.chip,
@@ -186,6 +196,19 @@
     a.chip:focus-visible {
       outline: 2px solid var(--urgent);
       outline-offset: 3px;
+    }
+
+    .chip[aria-selected="true"] {
+      background: var(--mark);
+      border-color: var(--mark);
+    }
+
+    a.chip[aria-selected="true"],
+    a.chip[aria-selected="true"]:visited { color: var(--mark-ink); }
+
+    .chip[aria-selected="true"] .mark {
+      background: var(--mark-ink);
+      color: var(--mark);
     }
 
     .mark {
@@ -505,6 +528,12 @@
 </head>
 <body>
   <svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-all" viewBox="0 0 24 24">
+      <rect x="4" y="4" width="6.2" height="6.2" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <rect x="13.8" y="4" width="6.2" height="6.2" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <rect x="4" y="13.8" width="6.2" height="6.2" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <rect x="13.8" y="13.8" width="6.2" height="6.2" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.7"/>
+    </symbol>
     <symbol id="icon-ai" viewBox="0 0 24 24">
       <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M12 3.2 13.4 8.2 18.4 9.6 13.4 11 12 16 10.6 11 5.6 9.6 10.6 8.2Z"/>
       <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m17.2 14.4.7 2.1 2.1.7-2.1.7-.7 2.1-.7-2.1-2.1-.7 2.1-.7Z"/>
@@ -565,7 +594,7 @@
       <div id="desk" hidden>
         <p id="updated" class="updated"></p>
         <div class="chips-bar">
-          <nav id="chips" class="chips" aria-label="分類"></nav>
+          <nav id="chips" class="chips" role="tablist" aria-label="分類"></nav>
         </div>
         <p id="empty" class="status" hidden>目前沒有還沒到期的優惠。</p>
         <p id="status" class="status" hidden></p>
@@ -709,14 +738,65 @@
       if (last < note.length) element.append(document.createTextNode(note.slice(last)));
     }
 
-    function makeChip(category) {
+    const ALL_TAB = { name: "全部", id: "all", className: "chip-all", icon: "icon-all" };
+
+    function tabIdFromHash() {
+      let raw = "";
+      try { raw = decodeURIComponent(location.hash.replace(/^#/, "")); }
+      catch (error) { raw = ""; }
+      return raw || ALL_TAB.id;
+    }
+
+    function revealTab(tab) {
+      const scroller = document.getElementById("chips");
+      const tabBox = tab.getBoundingClientRect();
+      const box = scroller.getBoundingClientRect();
+      if (tabBox.width === 0 || box.width === 0) return;
+      if (tabBox.left < box.left + 4) scroller.scrollLeft -= box.left - tabBox.left + 8;
+      else if (tabBox.right > box.right - 4) scroller.scrollLeft += tabBox.right - box.right + 8;
+    }
+
+    function applyTab(requested) {
+      const sections = [...document.querySelectorAll("#sections section")];
+      const known = new Set(sections.map((section) => section.dataset.tab));
+      const active = requested !== ALL_TAB.id && known.has(requested) ? requested : ALL_TAB.id;
+      if (requested !== ALL_TAB.id && active === ALL_TAB.id && location.hash && location.hash !== "#all") {
+        history.replaceState(null, "", "#all");
+      }
+      for (const section of sections) {
+        section.hidden = !(active === ALL_TAB.id || section.dataset.tab === active);
+      }
+      for (const tab of document.querySelectorAll("#chips [role='tab']")) {
+        const on = tab.dataset.tab === active;
+        tab.setAttribute("aria-selected", on ? "true" : "false");
+        tab.tabIndex = on ? 0 : -1;
+        if (on) revealTab(tab);
+      }
+    }
+
+    function selectTab(id) {
+      const hash = `#${id}`;
+      if (location.hash !== hash) history.pushState(null, "", hash);
+      applyTab(id);
+    }
+
+    function makeTab(category) {
       const link = document.createElement("a");
       link.className = category.className ? `chip ${category.className}` : "chip";
       link.href = `#${category.id}`;
-      const mark = document.createElement("span");
-      mark.className = "mark";
-      mark.append(icon(category.icon));
-      link.append(mark, document.createTextNode(category.name));
+      link.id = `tab-${category.id}`;
+      link.dataset.tab = category.id;
+      link.setAttribute("role", "tab");
+      link.setAttribute("aria-selected", "false");
+      link.tabIndex = -1;
+      if (category.id !== ALL_TAB.id) link.setAttribute("aria-controls", `panel-${category.id}`);
+      if (category.icon) {
+        const mark = document.createElement("span");
+        mark.className = "mark";
+        mark.append(icon(category.icon));
+        link.append(mark);
+      }
+      link.append(document.createTextNode(category.name));
       return link;
     }
 
@@ -766,8 +846,13 @@
 
     function makeSection(category, items, now) {
       const section = document.createElement("section");
-      section.id = category.id;
-      section.className = category.className ? `group ${category.className}` : "group";
+      section.id = `panel-${category.id}`;
+      section.dataset.tab = category.id;
+      section.className = category.className && category.className.startsWith("cat-")
+        ? `group ${category.className}`
+        : "group";
+      section.setAttribute("role", "tabpanel");
+      section.setAttribute("aria-labelledby", `tab-${category.id}`);
       const heading = document.createElement("h2");
       const mark = document.createElement("span");
       mark.className = "mark";
@@ -810,23 +895,28 @@
       chips.replaceChildren();
       sections.replaceChildren();
 
-      let count = 0;
+      const present = [];
       for (const category of CATEGORIES) {
         const items = groups.get(category.name);
         if (!items.length) continue;
-        count += 1;
-        chips.append(makeChip(category));
-        sections.append(makeSection(category, items, now));
+        present.push({ category, items });
       }
       if (extras.length) {
-        const category = { name: "其他", id: "cat-extra", className: "", icon: "icon-card" };
-        chips.append(makeChip(category));
-        sections.append(makeSection(category, extras, now));
-        count += 1;
+        present.push({
+          category: { name: "其他", id: "cat-extra", className: "", icon: "icon-card" },
+          items: extras,
+        });
       }
 
-      document.querySelector(".chips-bar").hidden = count === 0;
-      document.getElementById("empty").hidden = count !== 0;
+      if (present.length) chips.append(makeTab(ALL_TAB));
+      for (const entry of present) {
+        chips.append(makeTab(entry.category));
+        sections.append(makeSection(entry.category, entry.items, now));
+      }
+
+      document.querySelector(".chips-bar").hidden = present.length === 0;
+      document.getElementById("empty").hidden = present.length !== 0;
+      if (present.length) applyTab(tabIdFromHash());
     }
 
     async function loadDeals() {
@@ -893,6 +983,31 @@
       document.getElementById("desk").hidden = false;
       loadDeals();
     }
+
+    const chipsNav = document.getElementById("chips");
+    chipsNav.addEventListener("click", (event) => {
+      const tab = event.target.closest("[role='tab']");
+      if (!tab || !chipsNav.contains(tab)) return;
+      event.preventDefault();
+      selectTab(tab.dataset.tab);
+    });
+    chipsNav.addEventListener("keydown", (event) => {
+      const tabs = [...chipsNav.querySelectorAll("[role='tab']")];
+      const index = tabs.indexOf(document.activeElement);
+      if (index < 0) return;
+      let nextIndex = null;
+      if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
+      else if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
+      else if (event.key === "Home") nextIndex = 0;
+      else if (event.key === "End") nextIndex = tabs.length - 1;
+      if (nextIndex == null) return;
+      event.preventDefault();
+      const next = tabs[nextIndex];
+      selectTab(next.dataset.tab);
+      next.focus();
+    });
+    window.addEventListener("hashchange", () => applyTab(tabIdFromHash()));
+    window.addEventListener("popstate", () => applyTab(tabIdFromHash()));
 
     const gateForm = document.getElementById("gate-form");
     gateForm.addEventListener("submit", async (event) => {
