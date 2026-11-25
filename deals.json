@@ -72,6 +72,15 @@
     "added": "2026-11-25T01:50:00+08:00"
   },
   {
+    "id": "yahoo-bf",
+    "category": "電商檔期",
+    "title": "Yahoo購物中心黑五購物節",
+    "note": "11/23–11/30；大家電最高折 600、小家電 300、鞋包 200、婦幼 100 分類券（分類券限用至 11/27）；永豐分期滿 13,000 送 1,300、滿 30,000 送 3,000 刷卡金",
+    "href": "https://tw.buy.yahoo.com/coupons",
+    "expires": "2026-11-30T23:59:00+08:00",
+    "added": "2026-11-25T08:20:55+08:00"
+  },
+  {
     "id": "costco-bf",
     "category": "居家生活",
     "title": "好市多黑色購物節",
@@ -126,6 +135,33 @@
     "added": "2026-11-25T02:03:59+08:00"
   },
   {
+    "id": "coco-pearl-bogo",
+    "category": "吃喝",
+    "title": "CoCo 大杯日焙珍奶買一送一",
+    "note": "2 杯 65 元；官方 LINE 領券後用「都可訂」線上點餐，每人最多 2 張（4 杯），限量，部分門市不適用；11/25–11/26",
+    "href": "https://www.kirakacha.com.tw/article/2026-november-25-convenience-store-coffee-deals-0246",
+    "expires": "2026-11-26T23:59:00+08:00",
+    "added": "2026-11-25T08:20:55+08:00"
+  },
+  {
+    "id": "pizzahut-94199",
+    "category": "吃喝",
+    "title": "必勝客 13 吋大披薩 199 元",
+    "note": "優惠碼 94199，限外帶，不可併用，升級餅皮另加價；至 11/26",
+    "href": "https://www.kirakacha.com.tw/article/2026-november-25-convenience-store-coffee-deals-0246",
+    "expires": "2026-11-26T23:59:00+08:00",
+    "added": "2026-11-25T08:20:55+08:00"
+  },
+  {
+    "id": "kfc-tart-50541",
+    "category": "吃喝",
+    "title": "肯德基原味蛋撻買 6 送 6",
+    "note": "優惠代碼 50541，12 顆 294 元（原價 588）；11/17–11/30",
+    "href": "https://supertaste.tvbs.com.tw/offers/14539",
+    "expires": "2026-11-30T23:59:00+08:00",
+    "added": "2026-11-25T08:20:55+08:00"
+  },
+  {
     "id": "google-ai-pro",
     "category": "軟體訂閱",
     "title": "Google AI Pro 舊戶年繳最高 5 折",
@@ -169,6 +205,15 @@
     "href": "https://nordvpn.com/zh-tw/black-friday/",
     "expires": "2026-12-09",
     "added": "2026-11-25T02:03:59+08:00"
+  },
+  {
+    "id": "firefox-vpn-unlimited",
+    "category": "軟體訂閱",
+    "title": "Firefox 內建免費 VPN 流量無上限",
+    "note": "登入 Mozilla 帳號即可用，台灣在支援地區；原本每月 50GB，11/10 起至 2027/1/31 取消流量上限；只保護 Firefox 瀏覽器內流量，功能分批開放，圖示可能較晚出現",
+    "href": "https://blog.mozilla.org/en/firefox/built-in-vpn-unlimited-data/",
+    "expires": "2027-01-31",
+    "added": "2026-11-25T08:20:54+08:00"
   },
   {
     "id": "iherb-novapac26",
