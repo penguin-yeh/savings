@@ -18,15 +18,6 @@
     "added": "2026-11-25T01:50:00+08:00"
   },
   {
-    "id": "elevenlabs-huedini",
-    "category": "AI 免費額度",
-    "title": "ElevenLabs Huedini 11k 額度",
-    "note": "用 Huedini 做作品、引用轉推並留言「hue」",
-    "href": "https://x.com/alecwilcock/status/2125245858136383799",
-    "expires": "2026-11-25T23:11:00+08:00",
-    "added": "2026-11-25T01:50:00+08:00"
-  },
-  {
     "id": "aihubmix-5",
     "category": "AI 免費額度",
     "title": "AIHubMix $5 API 額度抽 5 人",
@@ -36,30 +27,12 @@
     "added": "2026-11-25T01:50:00+08:00"
   },
   {
-    "id": "shopee-1125",
-    "category": "電商檔期",
-    "title": "蝦皮 11/25 商城狂購節",
-    "note": "全站滿 100 折 50，代碼 SHO25NOV 滿 100 折 20",
-    "href": "https://shopee.tw/m/shopee-mall-sale",
-    "expires": "2026-11-25T23:59:00+08:00",
-    "added": "2026-11-25T01:50:00+08:00"
-  },
-  {
     "id": "momo-bf",
     "category": "電商檔期",
     "title": "momo 黑五購物節",
     "note": "每晚 21:00–23:59 滿額登記送 mo 點，超取滿 290 免運",
     "href": "https://www.momoshop.com.tw/edm/cmmedm.jsp?lpn=O7BnxyFfXGw&n=1",
     "expires": "2026-11-30",
-    "added": "2026-11-25T01:50:00+08:00"
-  },
-  {
-    "id": "pchome-24power",
-    "category": "電商檔期",
-    "title": "PChome 24力會員日黑五狂省節",
-    "note": "收納晾曬滿 1,411 折 211，先登入領券",
-    "href": "https://24h.pchome.com.tw/activity/24power",
-    "expires": "2026-11-25T23:59:00+08:00",
     "added": "2026-11-25T01:50:00+08:00"
   },
   {
@@ -117,15 +90,6 @@
     "added": "2026-11-25T01:50:00+08:00"
   },
   {
-    "id": "familymart-bogo",
-    "category": "吃喝",
-    "title": "全家 App 咖啡茶飲買一送一",
-    "note": "優惠趣大美式／拿鐵等買 1 送 1",
-    "href": "https://www.nownews.com/news/6894967",
-    "expires": "2026-11-25T23:59:00+08:00",
-    "added": "2026-11-25T01:50:00+08:00"
-  },
-  {
     "id": "hilife-coffee-bogo",
     "category": "吃喝",
     "title": "萊爾富特大杯咖啡買一送一",
@@ -160,6 +124,24 @@
     "href": "https://supertaste.tvbs.com.tw/offers/14539",
     "expires": "2026-11-30T23:59:00+08:00",
     "added": "2026-11-25T08:20:55+08:00"
+  },
+  {
+    "id": "starbucks-friend-day-1126",
+    "category": "吃喝",
+    "title": "星巴克感恩好友分享日 買一送一",
+    "note": "11/26（四）11:00–20:00，門市現場買兩杯大杯以上、同容量同冰熱同口味飲品，其中一杯免費；每人最多買二送二。外送、預訂、行動預點不適用。",
+    "href": "https://www.chinatimes.com/realtimenews/20261126001038-260405",
+    "expires": "2026-11-26T20:00:00+08:00",
+    "added": "2026-11-26T08:15:06+08:00"
+  },
+  {
+    "id": "hilife-coffee-11for11",
+    "category": "吃喝",
+    "title": "萊爾富會員咖啡買 11 送 11",
+    "note": "11/26–11/28，Hi-Life VIP App 會員限定，大杯特濃美式／特濃拿鐵／台茶18歐蕾／抹茶歐蕾買 11 送 11（整組原價 1,210–1,540 元），每人每日限 2 組，整買零取可跨店分次領，兌換期限至 2027/2/28。",
+    "href": "https://www.ettoday.net/news/20261125/3278038.htm",
+    "expires": "2026-11-28T23:59:00+08:00",
+    "added": "2026-11-26T08:15:06+08:00"
   },
   {
     "id": "google-ai-pro",
@@ -216,13 +198,31 @@
     "added": "2026-11-25T08:20:54+08:00"
   },
   {
-    "id": "iherb-novapac26",
-    "category": "保健／海外",
-    "title": "iHerb 代碼 NOVAPAC26 最高 7 折",
-    "note": "結帳輸入代碼，可寄台灣",
-    "href": "https://tw.iherb.com/info/sales-and-offers",
-    "expires": "2026-11-26T02:00:00+08:00",
-    "added": "2026-11-25T01:50:00+08:00"
+    "id": "epic-bread-and-fred",
+    "category": "軟體訂閱",
+    "title": "Epic 免費領《Bread & Fred》",
+    "note": "11/27 00:00（台灣時間）起到 12/4 00:00，Epic Games Store 免費領雙人合作企鵝攀爬遊戲《Bread & Fred》，領了永久留在帳號裡；只需 Epic 帳號。",
+    "href": "https://gamenotif.com/en/news/epic-free-games-bread-and-fred/",
+    "expires": "2026-12-04T00:00:00+08:00",
+    "added": "2026-11-26T08:15:06+08:00"
+  },
+  {
+    "id": "canva-pro-bf-half",
+    "category": "軟體訂閱",
+    "title": "Canva Pro 前 3 個月半價",
+    "note": "黑五月繳方案前 3 個月每月約 225 元（原價 450 元），之後恢復原價自動續訂，記得不用就取消。",
+    "href": "https://www.balloonconan.com/blog/ai-subscription-black-friday-2026-23",
+    "expires": "2026-12-04",
+    "added": "2026-11-26T08:15:06+08:00"
+  },
+  {
+    "id": "elevenlabs-annual-bf",
+    "category": "軟體訂閱",
+    "title": "ElevenLabs 年繳首年省 55%",
+    "note": "Creator 年繳首年約 US$99（原價 US$220），黑五活動到 12/1；第二年起恢復原價。",
+    "href": "https://www.balloonconan.com/blog/ai-subscription-black-friday-2026-23",
+    "expires": "2026-12-01",
+    "added": "2026-11-26T08:15:06+08:00"
   },
   {
     "id": "card-bf-roundup",
