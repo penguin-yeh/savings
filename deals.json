@@ -54,6 +54,15 @@
     "added": "2026-11-25T08:20:55+08:00"
   },
   {
+    "id": "uni-prosperity-black-friday",
+    "category": "電商檔期",
+    "title": "萬家福線上購物 超級黑五（新會員送 $600 購物金）",
+    "note": "11/20–11/30。天天到領券中心領 $150 購物金（每人每天 1 張）；下單指定品送 $200 券（滿 $2,500 可折，訂單用過券就不送）。新會員註冊並完成手機認證送 $600 購物金（1 張滿 $1,000 折 $300＋3 張滿 $1,000 折 $100）＋2 張宅配滿 $499 免運券，券效期 30 天。",
+    "href": "https://events.uni-prosperity.com.tw/ec-blackfriday202611/index.html",
+    "expires": "2026-11-30T23:59:00+08:00",
+    "added": "2026-11-27T08:14:59+08:00"
+  },
+  {
     "id": "costco-bf",
     "category": "居家生活",
     "title": "好市多黑色購物節",
@@ -99,24 +108,6 @@
     "added": "2026-11-25T02:03:59+08:00"
   },
   {
-    "id": "coco-pearl-bogo",
-    "category": "吃喝",
-    "title": "CoCo 大杯日焙珍奶買一送一",
-    "note": "2 杯 65 元；官方 LINE 領券後用「都可訂」線上點餐，每人最多 2 張（4 杯），限量，部分門市不適用；11/25–11/26",
-    "href": "https://www.kirakacha.com.tw/article/2026-november-25-convenience-store-coffee-deals-0246",
-    "expires": "2026-11-26T23:59:00+08:00",
-    "added": "2026-11-25T08:20:55+08:00"
-  },
-  {
-    "id": "pizzahut-94199",
-    "category": "吃喝",
-    "title": "必勝客 13 吋大披薩 199 元",
-    "note": "優惠碼 94199，限外帶，不可併用，升級餅皮另加價；至 11/26",
-    "href": "https://www.kirakacha.com.tw/article/2026-november-25-convenience-store-coffee-deals-0246",
-    "expires": "2026-11-26T23:59:00+08:00",
-    "added": "2026-11-25T08:20:55+08:00"
-  },
-  {
     "id": "kfc-tart-50541",
     "category": "吃喝",
     "title": "肯德基原味蛋撻買 6 送 6",
@@ -124,15 +115,6 @@
     "href": "https://supertaste.tvbs.com.tw/offers/14539",
     "expires": "2026-11-30T23:59:00+08:00",
     "added": "2026-11-25T08:20:55+08:00"
-  },
-  {
-    "id": "starbucks-friend-day-1126",
-    "category": "吃喝",
-    "title": "星巴克感恩好友分享日 買一送一",
-    "note": "11/26（四）11:00–20:00，門市現場買兩杯大杯以上、同容量同冰熱同口味飲品，其中一杯免費；每人最多買二送二。外送、預訂、行動預點不適用。",
-    "href": "https://www.chinatimes.com/realtimenews/20261126001038-260405",
-    "expires": "2026-11-26T20:00:00+08:00",
-    "added": "2026-11-26T08:15:06+08:00"
   },
   {
     "id": "hilife-coffee-11for11",
@@ -144,13 +126,22 @@
     "added": "2026-11-26T08:15:06+08:00"
   },
   {
-    "id": "google-ai-pro",
-    "category": "軟體訂閱",
-    "title": "Google AI Pro 舊戶年繳最高 5 折",
-    "note": "到 Google One 方案頁看是否有優惠價，依帳號而異",
-    "href": "https://one.google.com/about/",
-    "expires": "2026-11-26",
-    "added": "2026-11-25T01:50:00+08:00"
+    "id": "familymart-kangkang5-1127",
+    "category": "吃喝",
+    "title": "全家「康康5」咖啡第 2 杯 10 元＋投票日特大杯 39 元",
+    "note": "11/27–12/1 門市 Let's Café 大杯特濃美式、特濃拿鐵、厚奶拿鐵同品項第 2 杯 10 元。雪碧 600ml、UCC 艾洛瑪紅茶咖啡、百吉巧克力脆皮大雪糕、杜老爺淇淋巧酥甜筒、農心辛拉麵辣白醬／辛辣白菜炒麵買 1 送 1；Fami!ce 霜淇淋 2 支 55 元；舒潔雲絨舒適抽取衛生紙買 1 送 2。11/28 投票日單日：特大杯經典美式、經典拿鐵、Let's Tea 金桔揪喝檸單杯 39 元。",
+    "href": "https://www.ettoday.net/news/20261127/3278907.htm",
+    "expires": "2026-12-01T23:59:00+08:00",
+    "added": "2026-11-27T08:14:59+08:00"
+  },
+  {
+    "id": "seven-eleven-weekend-1127",
+    "category": "吃喝",
+    "title": "7-11 超值五六日：指定拿鐵任 2 杯 99 元、奶茶買 2 送 2",
+    "note": "11/27–11/29 黃金榛果太妃風味拿鐵、香草焦糖風味瑪其朵任 2 杯 99 元；琥珀小葉奶茶、梔子花奶青買 2 送 2（限現萃茶門市）；泡麵買 1 送 1；御料小館冷凍調理包（打拋豬炒飯、肉醬義大利麵等）任選買 2 送 2；SA 咖啡膠囊每盒 59 元。",
+    "href": "https://www.nownews.com/news/6895577",
+    "expires": "2026-11-29T23:59:00+08:00",
+    "added": "2026-11-27T08:14:59+08:00"
   },
   {
     "id": "adobe-cc",
@@ -223,6 +214,15 @@
     "href": "https://www.balloonconan.com/blog/ai-subscription-black-friday-2026-23",
     "expires": "2026-12-01",
     "added": "2026-11-26T08:15:06+08:00"
+  },
+  {
+    "id": "kiro-paid-10k-credits",
+    "category": "軟體訂閱",
+    "title": "Kiro 付費個人訂閱戶加贈 10,000 credits",
+    "note": "12/1 前成為個人付費訂閱戶（需信用卡），12/2 自動入帳 10,000 bonus credits，可用於任何模型，有效至 2027/1/31，不需另外領取。",
+    "href": "https://x.com/kirodotdev/status/2124961673228296222",
+    "expires": "2026-12-01",
+    "added": "2026-11-27T08:14:59+08:00"
   },
   {
     "id": "card-bf-roundup",
