@@ -63,6 +63,24 @@
     "added": "2026-11-27T08:14:59+08:00"
   },
   {
+    "id": "shopee-dec-800-100",
+    "category": "電商檔期",
+    "title": "蝦皮 12 月四波全站滿 800 折 100",
+    "note": "12/1、12/12、12/18、12/25 各檔期每人可領 1 張全站「滿 $800 折 $100」券；國泰世華蝦皮聯名卡當天可再領「滿 $1,000 折 $100」。是否可與其他券／蝦幣疊加依券面為準。",
+    "href": "https://howlife.cna.com.tw/financial/20261113s008.aspx",
+    "expires": "2026-12-25T23:59:00+08:00",
+    "added": "2026-11-28T08:22:36+08:00"
+  },
+  {
+    "id": "pchome-1212-12pct",
+    "category": "電商檔期",
+    "title": "PChome 雙12 單筆滿 12 元登記送 12% P幣",
+    "note": "12/1–12/12 期間單筆消費滿 12 元，到活動頁完成登記即回饋 12% P幣；回饋上限與細則見活動頁。",
+    "href": "https://24h.pchome.com.tw/activity/campaign/C743215141",
+    "expires": "2026-12-12T23:59:00+08:00",
+    "added": "2026-11-28T08:22:36+08:00"
+  },
+  {
     "id": "costco-bf",
     "category": "居家生活",
     "title": "好市多黑色購物節",
@@ -144,15 +162,6 @@
     "added": "2026-11-27T08:14:59+08:00"
   },
   {
-    "id": "adobe-cc",
-    "category": "軟體訂閱",
-    "title": "Adobe CC Pro 首年 4 折",
-    "note": "限首次直接訂閱，個人版首年 NT$924／月",
-    "href": "https://www.adobe.com/tw/products/special-offers.html",
-    "expires": "2026-11-27",
-    "added": "2026-11-25T01:50:00+08:00"
-  },
-  {
     "id": "tradingview-bf",
     "category": "軟體訂閱",
     "title": "TradingView 年繳送 1 個月",
@@ -223,6 +232,42 @@
     "href": "https://x.com/kirodotdev/status/2124961673228296222",
     "expires": "2026-12-01",
     "added": "2026-11-27T08:14:59+08:00"
+  },
+  {
+    "id": "gog-dead-age-2",
+    "category": "軟體訂閱",
+    "title": "GOG 免費領《屍變紀元 2》Dead Age 2",
+    "note": "登入 GOG 帳號領取即永久入庫，台灣時間 11/30 晚上 10 點截止。",
+    "href": "https://www.gog.com/en/news/gog_black_friday_claim_your_free_copy_of_dead_age_2",
+    "expires": "2026-11-30T22:00:00+08:00",
+    "added": "2026-11-28T08:22:36+08:00"
+  },
+  {
+    "id": "suno-bf-annual-30",
+    "category": "軟體訂閱",
+    "title": "Suno 年繳方案首年 7 折",
+    "note": "網頁版年繳 Pro／Premier 首年 30% off（Pro 首年 $67.20，之後 $96/年續約）；App 內購不適用。",
+    "href": "https://help.suno.com/en/articles/14878337",
+    "expires": "2026-11-30T23:59:00+08:00",
+    "added": "2026-11-28T08:22:36+08:00"
+  },
+  {
+    "id": "grammarly-pro-bf-half",
+    "category": "軟體訂閱",
+    "title": "Grammarly Pro 黑五首期 5 折",
+    "note": "免費版與新用戶升級 Pro 首期半價（約 $6/月），結帳自動套用；App Store／Google Play 購買不適用，官方未公布截止日。",
+    "href": "https://www.grammarly.com/black-friday",
+    "expires": null,
+    "added": "2026-11-28T08:22:36+08:00"
+  },
+  {
+    "id": "iherb-bfcm-30",
+    "category": "保健／海外",
+    "title": "iHerb 黑五第二波最高 7 折（BFCMAPAC30）",
+    "note": "結帳輸入 BFCMAPAC30，指定商品最高 30% off，折幅以商品頁與結帳顯示為準；台灣可直送。",
+    "href": "https://tw.iherb.com/c/nov-deals",
+    "expires": "2026-12-03T02:00:00+08:00",
+    "added": "2026-11-28T08:22:36+08:00"
   },
   {
     "id": "card-bf-roundup",
