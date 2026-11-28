@@ -233,17 +233,28 @@
     }
 
     .deals li {
+      position: relative;
       background: var(--paper);
       color: var(--fg);
       border: 1px solid var(--line);
-      border-left: 4px solid var(--mark);
       border-radius: 0.85rem;
-      padding: 0.8rem 0.9rem 0.85rem;
+      padding: 0.8rem 0.9rem 0.85rem 1.45rem;
       margin: 0 0 0.7rem;
       min-width: 0;
     }
 
-    .deals li.is-urgent { border-left-color: var(--urgent); }
+    .deals li::before {
+      content: "";
+      position: absolute;
+      left: 0.65rem;
+      top: 0.7rem;
+      bottom: 0.7rem;
+      width: 4px;
+      border-radius: 0;
+      background: var(--mark);
+    }
+
+    .deals li.is-urgent::before { background: var(--urgent); }
 
     .title-link {
       color: var(--fg);
